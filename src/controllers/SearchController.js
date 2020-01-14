@@ -36,7 +36,7 @@ module.exports = {
 
         // Retorna as informações obtidas na query do BD em formato JSON
 
-        return resp.json({ devs });
+        return resp.json(devs);
 
     }
 };
