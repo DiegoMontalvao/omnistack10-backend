@@ -1,7 +1,10 @@
 const express = require ('express');
 const mongoose = require ('mongoose');
+const routes = require ('./routes');
 
 const app = express();
+
+// Iniciando conexão com o MongoDB Atlas usando a dependencia mongoose
 
 mongoose.connect('mongodb+srv://diego:di1515mo@cluster0-squkz.mongodb.net/week10?retryWrites=true&w=majority', {
     useNewUrlParser: true,
@@ -9,6 +12,7 @@ mongoose.connect('mongodb+srv://diego:di1515mo@cluster0-squkz.mongodb.net/week10
 });
 
 app.use(express.json());
+app.use(routes);
 
 // Principais métodos (verbos) http - get, post, put, delete
 
@@ -19,10 +23,5 @@ app.use(express.json());
 
 // MongoDB (Não-relacional) na nuvem com MongoDB Atlas
 
-app.post('/users', (req, resp) => {
-    console.log(req.body);
-    return resp.json({ message: 'Hello omnistack!' });
-
-});
 
 app.listen(3333);
