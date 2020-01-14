@@ -28,7 +28,7 @@ module.exports = {
 
     async store(req, resp) {
 
-        // Recebendo as informações de cadastro do POST através do body da requisição e armazenando em váriaveis separadas usando atribuição via desestruturação
+        // Recebendo as informações de cadastro do POST da rota /devs através do body da requisição e armazenando em váriaveis separadas usando atribuição via desestruturação
 
         const { github_username, techs, latitude, longitude } = req.body;
 
@@ -48,9 +48,7 @@ module.exports = {
     
             const { name = login, avatar_url, bio } = apiResponse.data;
 
-            // Tratando as tecnologias informadas pelo usuário no body que foram informadas como string, para converter em array
-            //1º separando aonde houver , usando o método split
-            //2º percorrendo o array usando o método map e eliminando os espações em branco usando o método trim retornando um array
+            // Tratando as tecnologias informadas pelo usuário no body que foram informadas como string, com o método parseStringAsArray criado anteriormente
         
             const techsArray = parseStringAsArray(techs);
 
