@@ -11,7 +11,9 @@ const app = express();
 
 mongoose.connect('mongodb+srv://diego:di1515mo@cluster0-squkz.mongodb.net/week10?retryWrites=true&w=majority', {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
 });
 
 // Informando que a aplicação usará o formato JSON como recebimento e envio de dados

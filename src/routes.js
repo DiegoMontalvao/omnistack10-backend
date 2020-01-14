@@ -21,6 +21,14 @@ routes.get('/devs', DevController.index);
 
 routes.post('/devs', DevController.store);
 
+// Criando rota PUT /devs para receber e atualizar os Dev com o método update do DevController
+
+routes.put('/devs', DevController.update);
+
+// Criando rota DELETE /devs para deletar Dev com o método update do DevController
+
+routes.delete('/devs', DevController.destroy);
+
 // Criando rota GET /search para buscar devs conforme os parametros informados usando o método index do SearchController
 
 routes.get('/search', SearchController.index);

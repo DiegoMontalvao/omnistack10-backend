@@ -75,5 +75,45 @@ module.exports = {
 
         return resp.json(dev);
 
+    },
+
+    async destroy(req, resp) {
+        const { id } = req.query;
+        dev = await Dev.findByIdAndDelete({ _id: id });
+        return resp.json('Dev excluido com sucesso!');
+
+    },
+
+    async update(req, resp) {
+        const { id } = req.query;
+        const { github_username, techs, latitude, longitude } = req.body;
+
+        // Usando o axios para receber a API do github passando o github_username enviado pelo usuário no body da requisição
+
+        const apiResponse = await axios.get(`https://api.github.com/users/${github_username}`);
+
+        // Recebendo as informações da propriedade data da API do github e armazenando em váriaveis separadas usando atribuição via desestruturação
+
+        const { avatar_url, bio } = apiResponse.data;
+
+        // Tratando as tecnologias informadas pelo usuário no body que foram informadas como string, com o método parseStringAsArray criado anteriormente
+    
+        const techsArray = parseStringAsArray(techs);
+
+        // Tratando as coordenadas recebidas pelo usuário para armazenar no BD conforme documentação do mongoose
+    
+        const location = {
+            type: 'Point',
+            coordinates: [longitude, latitude],
+        };
+
+        dev = await Dev.findByIdAndUpdate({ _id: id }, {
+            avatar_url,
+            bio,
+            techs: techsArray,
+            location
+        });
+
+        return resp.json(dev);
     }
 };
