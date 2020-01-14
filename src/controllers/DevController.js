@@ -77,15 +77,33 @@ module.exports = {
 
     },
 
+    // Função destroy para eliminar registro do recurso (dev)
+
     async destroy(req, resp) {
+
+        // Recebendo ID do query
         const { id } = req.query;
+
+        // Excluindo o dev selecionado
+
         dev = await Dev.findByIdAndDelete({ _id: id });
+
+        // Retornando mensagem para confirmar a exclusão
+
         return resp.json('Dev excluido com sucesso!');
 
     },
 
+    // Função destroy para eliminar registro do recurso (dev)
+
     async update(req, resp) {
+
+        // Recebendo ID do query
+
         const { id } = req.query;
+
+        // Recebendo os campos a serem atualizados do body
+
         const { github_username, techs, latitude, longitude } = req.body;
 
         // Usando o axios para receber a API do github passando o github_username enviado pelo usuário no body da requisição
@@ -107,12 +125,16 @@ module.exports = {
             coordinates: [longitude, latitude],
         };
 
+        // Atualizando o dev selecionado conforme dados recebidos
+
         dev = await Dev.findByIdAndUpdate({ _id: id }, {
             avatar_url,
             bio,
             techs: techsArray,
             location
         });
+
+        // Retornando dados do dev conforme atualização
 
         return resp.json(dev);
     }
