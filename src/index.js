@@ -1,5 +1,6 @@
 const express = require ('express');
 const mongoose = require ('mongoose');
+const cors = require ('cors');
 const routes = require ('./routes');
 
 // Instanciando o express para váriavel app
@@ -15,6 +16,13 @@ mongoose.connect('mongodb+srv://diego:di1515mo@cluster0-squkz.mongodb.net/week10
     useCreateIndex: true,
     useFindAndModify: false
 });
+
+// Cross-origin resource sharing (CORS ou compartilhamento de recursos de origem cruzada) é uma especificação de uma tecnologia de navegadores
+// que define meios para um servidor permitir que seus recursos sejam acessados por uma página web de um domínio diferente.
+
+// Usando o cors para liberar acesso ao nosso backend
+
+app.use(cors());
 
 // Informando que a aplicação usará o formato JSON como recebimento e envio de dados
 
