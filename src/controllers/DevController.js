@@ -1,6 +1,7 @@
 const axios = require ('axios');
 const Dev = require ('../models/Dev');
 const parseStringAsArray = require('../utils/parseStringAsArray');
+const { findConnections, sendMessage } = require('../websocket');
 
 // O controller geralmente possui 5 funções:
 // Index: Quando queremos mostrar uma lista dos registros do recurso em questão (Dev)
@@ -68,8 +69,17 @@ module.exports = {
                 bio,
                 techs: techsArray,
                 location
-            });
-        };
+            })
+
+            // Filtrar as conexões que estão há no máximo 10km de distância e que o novo dev tenho uma das tecnologias filtradas
+
+            const sendSocketMessageTo = findConnections(
+                { latitude, longitude },
+                techsArray,
+            )
+                
+            sendMessage(sendSocketMessageTo, 'new-dev', dev);
+        }
 
         // Retornando o novo registro no formato JSON
 
@@ -82,6 +92,7 @@ module.exports = {
     async destroy(req, resp) {
 
         // Recebendo ID do query
+
         const { id } = req.query;
 
         // Excluindo o dev selecionado

@@ -1,11 +1,16 @@
 const express = require ('express');
 const mongoose = require ('mongoose');
 const cors = require ('cors');
+const http = require('http');
 const routes = require ('./routes');
+const { setupWebsocket } = require('./websocket');
 
 // Instanciando o express para váriavel app
 
 const app = express();
+const server = http.Server(app);
+
+setupWebsocket(server);
 
 // Usaremos o MongoDB (Não-relacional) na nuvem com MongoDB Atlas
 // Iniciando conexão com o MongoDB Atlas usando a dependencia mongoose
@@ -34,4 +39,4 @@ app.use(routes);
 
 // Informando que a aplicação irá rodar na porta 3333
 
-app.listen(3333);
+server.listen(3333);
