@@ -10,7 +10,6 @@ module.exports = {
         const { latitude, longitude } = req.query;
 
         // Buscando no BD registro com os parametros informados
-        // Operador $in: busca algum registro com o valor informado
         // Operador $near: busca localidades próximas, devem ser informados parametros complementares para comparação
         // Operador $geometry: recebe as coordenadas que usamos para teste no insomnia para simular localização do usuário que está realizando a busca
         // Operador $maxDistance: determina a distância máxima em metros que o dev deve estar para ser relacionado na busca

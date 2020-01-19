@@ -39,4 +39,5 @@ module.exports = {
         return resp.json(devs);
 
     }
+
 };
