@@ -1,6 +1,7 @@
 const { Router } = require ('express');
 const DevController = require ('./controllers/DevController');
 const SearchController = require ('./controllers/SearchController');
+const DevsNearController = require ('./controllers/DevsNearController');
 
 // Instanciando o metodo Router() importado do express
 
@@ -32,5 +33,9 @@ routes.delete('/devs', DevController.destroy);
 // Criando rota GET /search para buscar devs conforme os parametros informados usando o método index do SearchController
 
 routes.get('/search', SearchController.index);
+
+// Criando rota GET /searchAllDevs para buscar devs apenas pela distancia indiferente das techs cadastradas
+
+routes.get('/devsnear', DevsNearController.index);
 
 module.exports = routes;
