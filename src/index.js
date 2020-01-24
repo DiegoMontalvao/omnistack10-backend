@@ -9,7 +9,7 @@ const { setupWebsocket } = require('./websocket');
 
 const app = express();
 
-// Separando o HTTP na variavel
+// Separando o HTTP na variavel server
 
 const server = http.Server(app);
 
